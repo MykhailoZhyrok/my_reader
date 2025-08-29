@@ -12,7 +12,7 @@ jobs:
       contents: read
       packages: write
     env:
-      IMAGE_NAME: ghcr.io/${{ github.repository_owner,, }}/my_reade
+      IMAGE_NAME: ghcr.io/${{ github.repository_owner,, }}/my_reader
     steps:
       - name: Checkout
         uses: actions/checkout@v4
