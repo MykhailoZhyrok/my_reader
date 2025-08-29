@@ -1,0 +1,95 @@
+my-reader/
+├─ app/                               # App Router (страницы/роуты/layout)
+│  ├─ layout.tsx
+│  ├─ page.tsx                        # главная: импорт/список книг
+│  ├─ offline/page.tsx                # офлайн-экран
+│  ├─ (reader)/                       # группировка страниц ридера
+│  │  ├─ [id]/page.tsx                # чтение книги по id
+│  │  └─ head.tsx
+│  ├─ api/                            # (опц.) серверные ручки на Next (Edge/Node)
+│  │  ├─ upload/route.ts              # выдача presigned URL и т.п.
+│  │  ├─ books/confirm/route.ts
+│  │  └─ progress/route.ts
+│  └─ sw-register.tsx                 # регистрация сервис-воркера (client-only)
+│
+├─ components/                        # UI-компоненты
+│  ├─ readers/                        # компоненты ридеров
+│  │  ├─ EpubReader.tsx
+│  │  └─ PdfReader.tsx
+│  ├─ library/                        # карточки/список библиотеки
+│  │  ├─ BookCard.tsx
+│  │  └─ BookGrid.tsx
+│  ├─ ui/                             # кнопки, модалки, переключатели темы и т.п.
+│  │  ├─ Button.tsx
+│  │  └─ ThemeSwitch.tsx
+│  └─ layout/                         # шапка/навигация
+│     └─ AppHeader.tsx
+│
+├─ features/                          # фичи как модули (чистая архитектура)
+│  ├─ import-book/                    # импорт/парсинг
+│  │  ├─ ImportDropzone.tsx
+│  │  └─ index.ts
+│  ├─ reading-progress/               # прогресс/закладки
+│  │  ├─ useReadingProgress.ts
+│  │  └─ index.ts
+│  └─ sync/                           # синхронизация с сервером
+│     ├─ useSyncQueue.ts
+│     └─ index.ts
+│
+├─ lib/                               # прикладная логика, не завязанная на UI
+│  ├─ storage/                        # работа с OPFS/IndexedDB
+│  │  ├─ files.ts                     # save/load/remove Blob (OPFS -> fallback IDB)
+│  │  ├─ meta.ts                      # метаданные книг (IDB)
+│  │  └─ quota.ts                     # estimate(), persist()
+│  ├─ epub/                           # хелперы по EPUB
+│  │  ├─ extractMeta.ts               # title/author/cover
+│  │  └─ search.ts                    # (опц.) поиск по контенту EPUB
+│  ├─ pdf/                            # хелперы по PDF
+│  │  └─ previewFirstPage.ts
+│  ├─ pwa/                            # сервисные утилиты PWA
+│  │  ├─ runtimeCache.ts              # (если нужен кастом кэшинг)
+│  │  └─ bgSync.ts                    # очередь задач офлайн
+│  ├─ api-client/                     # клиент к своим API (fetcher, схемы)
+│  │  ├─ http.ts
+│  │  └─ books.ts
+│  ├─ crypto/sha256.ts                # хэширование для дедупликации (WebCrypto)
+│  └─ utils/                          # общие утилиты
+│     ├─ blob.ts
+│     └─ ids.ts
+│
+├─ hooks/                             # React hooks (UI-уровень)
+│  ├─ useLibrary.ts                   # список книг, импорт, удаление
+│  ├─ useOnlineStatus.ts
+│  └─ useTheme.ts
+│
+├─ store/                             # состояние (zustand/jotai или redux)
+│  └─ useSettingsStore.ts             # тема, размер шрифта, предпочитаемый рендер и т.п.
+│
+├─ types/                             # типы и контракты
+│  ├─ book.ts                         # BookMeta, BookRef, Format
+│  └─ api.ts                          # DTO для /api/*
+│
+├─ public/                            # статика, доступная по /...
+│  ├─ manifest.webmanifest
+│  ├─ sw.js                           # если делаешь кастомный SW (или workbox)
+│  ├─ icons/                          # 192/512 и т.п.
+│  └─ fonts/
+│
+├─ styles/
+│  ├─ globals.css
+│  └─ reader.css                      # специфичные стили ридера (колонки, темы)
+│
+├─ scripts/                           # dev-скрипты (node/ts-node)
+│  └─ generate-icons.ts               # из svg → png 192/512
+│
+├─ tests/                             # unit/integration (vitest/jest)
+│  └─ lib/
+│
+├─ e2e/                               # e2e (playwright/cypress)
+│  └─ reader.spec.ts
+│
+├─ .env.example                       # пример переменных среды (S3_KEYS, API_URL)
+├─ next.config.mjs                    # конфиг Next (+ next-pwa, если используешь)
+├─ tsconfig.json                      # здесь же алиасы путей
+├─ package.json
+└─ README.md
