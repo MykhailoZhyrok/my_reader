@@ -1,22 +1,27 @@
-# deps
+# ---------- deps ----------
 FROM node:20-alpine AS deps
 WORKDIR /app
+# PNPM через Corepack
 ENV PNPM_HOME=/root/.local/share/pnpm
 ENV PATH=$PNPM_HOME:$PATH
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@10.15.0 --activate
 COPY package.json pnpm-lock.yaml ./
-# кэш стора pnpm между билдами
+# кеш стора pnpm между билдами
 RUN --mount=type=cache,id=pnpm-store,target=/root/.local/share/pnpm/store \
     pnpm install --frozen-lockfile
 
-# build
+# ---------- build ----------
 FROM node:20-alpine AS build
 WORKDIR /app
+# PNPM тоже нужен в этой стадии
+ENV PNPM_HOME=/root/.local/share/pnpm
+ENV PATH=$PNPM_HOME:$PATH
+RUN corepack enable && corepack prepare pnpm@10.15.0 --activate
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN pnpm build
 
-# run
+# ---------- run ----------
 FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
