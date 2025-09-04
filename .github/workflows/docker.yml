@@ -2,7 +2,7 @@ name: Build & Push Docker
 
 on:
   push:
-    branches: [ "main" ]   # или твоя ветка
+    branches: ['main'] # или твоя ветка
   workflow_dispatch: {}
 
 jobs:
@@ -36,7 +36,7 @@ jobs:
           push: true
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64   # твой сервер на amd64
+          platforms: linux/amd64 # твой сервер на amd64
           tags: |
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
