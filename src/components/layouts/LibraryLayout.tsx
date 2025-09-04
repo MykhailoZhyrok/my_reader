@@ -13,7 +13,12 @@ export default function LibraryLayout({
 	return (
 		<div className="flex flex-col items-center relative max-w-[800px] mx-auto justify-between h-dvh">
 			{background && (
-				<Image src={background} alt="Logo" className={`object-contain`} fill />
+				<Image
+					src={background}
+					alt="Logo"
+					className={`object-contain z-[-1] aspect-[736/1226]`}
+					fill
+				/>
 			)}
 
 			<div
