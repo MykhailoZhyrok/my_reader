@@ -41,19 +41,15 @@ export default function PDFReader({ src, storageKey }: Props) {
 				const { scrollTop, progress } = JSON.parse(raw);
 				const el = doc.documentElement;
 				const body = doc.body;
-                console.log(scrollTop, progress);
+				console.log(scrollTop, progress);
 				const apply = () => {
+					let y = typeof scrollTop === 'number' ? scrollTop : 0;
 
-					let y =
-						typeof scrollTop === 'number'
-							? scrollTop
-							: 0;
+					const win = doc.defaultView || window;
 
-                    const win = doc.defaultView|| window;
-
-                    win.scrollTo({ top: y, behavior: 'smooth' });
+					win.scrollTo({ top: y, behavior: 'smooth' });
 				};
-                console.log(apply);
+				console.log(apply);
 				apply();
 				setTimeout(apply, 0);
 				setTimeout(apply, 500);
