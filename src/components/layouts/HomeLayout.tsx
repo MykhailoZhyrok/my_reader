@@ -1,8 +1,9 @@
 import { ReactNode } from 'react';
+import { Navbar } from '@/components/navigation/BottomNav';
+import { mainNavbar } from '@/lib/nav_configs/main_config';
 import Image from 'next/image';
 
-
-export default function LibraryLayout({
+export default function HomeLayout({
 	children,
 	background,
 }: {
@@ -25,7 +26,7 @@ export default function LibraryLayout({
 			>
 				{children}
 			</div>
-
+			<Navbar components={mainNavbar} />
 		</div>
 	);
 }

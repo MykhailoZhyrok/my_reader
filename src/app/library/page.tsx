@@ -1,15 +1,14 @@
-import LibraryLayout from '@/components/layouts/LibraryLayout';
-import PDFReader from '@/components/readers/PDF_reader';
+import BookReader from '@/components/reader/BookReader';
 import FullViewLayout from '@/components/layouts/FullViewLayout';
+import LibraryLayout from '@/components/layouts/LibraryLayout';
 
 export default function LibraryPage() {
-	const pageTitle = 'Library Page';
 
 	return (
 		<>
 			<LibraryLayout background="/images/backgrounds/home_back.jpg">
 				<FullViewLayout>
-					<PDFReader src="/books/shantaram/index.html" />
+					<BookReader src="/books/shantaram/index.html" />
 				</FullViewLayout>
 			</LibraryLayout>
 		</>

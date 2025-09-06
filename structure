@@ -15,7 +15,7 @@ my-reader/
 ├─ components/                        # UI-компоненты
 │  ├─ readers/                        # компоненты ридеров
 │  │  ├─ EpubReader.tsx
-│  │  └─ PdfReader.tsx
+│  │  └─ BookReader.tsx
 │  ├─ library/                        # карточки/список библиотеки
 │  │  ├─ BookCard.tsx
 │  │  └─ BookGrid.tsx

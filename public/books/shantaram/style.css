@@ -160,7 +160,8 @@
 	margin-bottom: 5pt;
 	margin-top: 5pt;
 }
-.calibre2, .calibre4 {
+.calibre2,
+.calibre4 {
 	width: 100%;
 	object-fit: contain;
 	display: block;
