@@ -5,7 +5,6 @@ import {
 	saveProgress,
 	getMaxScrollable,
 } from '@/utils/progress';
-import {ensureReaderTypography, setReaderScale} from "@/utils/readerTypography";
 
 // простая пагинация: количество "экранов" по высоте
 function calcPages(totalScrollable: number, viewportH: number) {
@@ -21,7 +20,6 @@ export interface HandlersReaderOptions {
 	setMaxHeight: (h: number) => void;
 	setPageCount: (c: number) => void;
 	scale: number;
-
 }
 
 /**
@@ -35,12 +33,11 @@ export function attachInsideHandlers(opts: HandlersReaderOptions): () => void {
 	const doc = iframe.contentDocument;
 	if (!win || !doc) return () => {};
 
-
 	// --- helpers
 	const recomputeHeightsAndPages = () => {
-		const total = getMaxScrollable(doc); // scrollHeight - clientHeight
+		const total = getMaxScrollable(doc);
 		setMaxHeight(total);
-        console.log('recomputeHeightsAndPages', total);
+		console.log('recomputeHeightsAndPages', total);
 		const vp = Math.max(
 			1,
 			win.innerHeight || doc.documentElement.clientHeight || 1,
@@ -48,7 +45,6 @@ export function attachInsideHandlers(opts: HandlersReaderOptions): () => void {
 		const { pages } = calcPages(total, vp);
 		setPageCount(pages);
 	};
-
 
 	const debouncedSave = (() => {
 		let t: number | null = null;
@@ -104,9 +100,7 @@ export function attachInsideHandlers(opts: HandlersReaderOptions): () => void {
 		// наблюдать лучше за documentElement и body
 		if (doc.documentElement) ro.observe(doc.documentElement);
 		if (doc.body) ro.observe(doc.body);
-	} catch {
-		// ResizeObserver может отсутствовать — не критично
-	}
+	} catch {}
 
 	// --- disposer
 	return () => {

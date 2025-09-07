@@ -10,9 +10,8 @@ export function getMaxScrollable(doc: Document, iframe?: HTMLIFrameElement) {
 
 	const scrollHeight = Math.max(el?.scrollHeight || 0, body?.scrollHeight || 0);
 	const clientHeight = Math.max(iframe?.clientHeight || 0);
-    console.log('getMaxScrollable', scrollHeight, clientHeight);
+	console.log('getMaxScrollable', scrollHeight, clientHeight);
 	return Math.max(1, scrollHeight - clientHeight);
-
 }
 
 export function saveProgress(

@@ -1,8 +1,8 @@
 export function ensureReaderTypography(doc: Document) {
-    if (doc.getElementById('__reader_typography__')) return;
-    const style = doc.createElement('style');
-    style.id = '__reader_typography__';
-    style.textContent = `
+	if (doc.getElementById('__reader_typography__')) return;
+	const style = doc.createElement('style');
+	style.id = '__reader_typography__';
+	style.textContent = `
     :root{
       --reader-base: 16px;   /* базовый размер шрифта */
       --reader-scale: 1;     /* общий множитель 0.8..1.8 */
@@ -47,15 +47,15 @@ export function ensureReaderTypography(doc: Document) {
     /* Чуть увеличиваем межстрочный при крупном масштабе */
     body{ line-height: calc(var(--reader-line) + (max(var(--reader-scale),1) - 1) * 0.2); }
   `;
-    doc.head.appendChild(style);
+	doc.head.appendChild(style);
 }
 
 export function setReaderScale(doc: Document, scale: number) {
-    const s = Math.max(0.8, Math.min(scale, 1.8));
-    doc.documentElement.style.setProperty('--reader-scale', String(s));
+	const s = Math.max(0.8, Math.min(scale, 1.8));
+	doc.documentElement.style.setProperty('--reader-scale', String(s));
 }
 
 export function setReaderBase(doc: Document, px: number) {
-    const clamped = Math.max(12, Math.min(px, 22));
-    doc.documentElement.style.setProperty('--reader-base', `${clamped}px`);
+	const clamped = Math.max(12, Math.min(px, 22));
+	doc.documentElement.style.setProperty('--reader-base', `${clamped}px`);
 }
